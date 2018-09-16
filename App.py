@@ -33,11 +33,6 @@ scheduler.init_app(app)
 scheduler.start()
 
 
-@app.route('/stockInfo')
-def stockInfo():
-	sim.mineStockData()
-	return "success"
-
 @app.route('/stock/<string:code>')
 def getAStock(code):
 	result={}
