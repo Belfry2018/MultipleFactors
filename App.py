@@ -1,5 +1,4 @@
 from flask import Flask
-import StockInfoMiner as sim
 from flask_apscheduler import APScheduler
 import tushare as ts
 import json
