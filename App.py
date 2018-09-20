@@ -58,6 +58,7 @@ def getAStock(code):
 		temp['volume']=row['volume']
 		stocks.append(temp)
 
+	stocks.sort(key=lambda x:x['time'])
 	result['trendData']=stocks
 
 	return json.dumps(result,ensure_ascii=False)
@@ -85,7 +86,7 @@ def getStocksData():
 if __name__ == "__main__" :
 	# db.setup_db()
 	# getStocksData()
-	print(getAStock('603999'))
+	getAStock('000001')
 	# getStrategy(12232323)
 	# app.run(debug=True)
 
