@@ -47,10 +47,10 @@ def getAStock(code):
 	result['marketProfitability']=stock.per
 	result['totalVolume']=stock.volume
 
-	data=ts.get_k_data(code).head(90)
+	data=ts.get_hist_data(code).head(90)
 	for index, row in data.iterrows():
 		temp={}
-		temp['time']=row['date']
+		temp['time']=index
 		temp['start']=row['open']
 		temp['end']=row['close']
 		temp['max']=row['high']
@@ -85,6 +85,7 @@ def getStocksData():
 if __name__ == "__main__" :
 	# db.setup_db()
 	# getStocksData()
+	print(getAStock('603999'))
 	# getStrategy(12232323)
-	app.run(debug=True)
+	# app.run(debug=True)
 
