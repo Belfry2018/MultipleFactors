@@ -1,4 +1,3 @@
-
 from sqlalchemy import Column, BIGINT, BLOB, TEXT, VARCHAR, INT, FLOAT, BOOLEAN, ForeignKey, create_engine
 from sqlalchemy.dialects.mysql import DATETIME
 from sqlalchemy.ext.declarative import declarative_base
@@ -26,6 +25,22 @@ class Stock(Base):
 	mktcap=Column(FLOAT)#总市值
 	nmc=Column(FLOAT)#流通市值
 
+class Strategy(Base):
+	__tablename__='strategy'
+	__table_args__ = {"mysql_charset": "utf8"}
+	id=Column(BIGINT,primary_key=True,name='record_id')
+	name=Column('record_name',VARCHAR(255),nullable=True)
+	time=Column('record_time',VARCHAR(255),nullable=True)
+	user_id=Column('user_id',BIGINT)
+	items=relationship('Item')
+
+class Item(Base):
+	__tablename__ = 'strategy_item'
+	__table_args__ = {"mysql_charset": "utf8"}
+	id=Column(BIGINT,primary_key=True)
+	buy_rate=Column('buy_rate',FLOAT)
+	stock_id=Column('stock_id',VARCHAR(255),nullable=True)
+	strategy_id=Column('strategy_record_id',BIGINT,ForeignKey('strategy.record_id'),nullable=True)
 
 
 
