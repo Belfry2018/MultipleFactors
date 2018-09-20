@@ -1,9 +1,9 @@
 from flask import Flask
-import StockInfoMiner as sim
 from flask_apscheduler import APScheduler
 import tushare as ts
 import json
 import DBHandler as db
+from DBHandler import Strategy
 
 '''
 scheduer每隔一小时更新一次股票数据
@@ -62,6 +62,15 @@ def getAStock(code):
 
 	return json.dumps(result,ensure_ascii=False)
 
+# 根据recordId获得需要回测的策略
+# recordId是long
+def getStrategy(recordId):
+	rid=int(recordId)   # python3中整数就是long
+	session=db.setup_db()
+	strategy=session.query(Strategy).filter(Strategy.id==rid).one()
+	return strategy
+
+
 def getAStockBasicData(code):
 	session=db.setup_db()
 	stock=session.query(db.Stock).filter(db.Stock.code==code).one()
@@ -76,6 +85,6 @@ def getStocksData():
 if __name__ == "__main__" :
 	# db.setup_db()
 	# getStocksData()
-
+	# getStrategy(12232323)
 	app.run(debug=True)
 
