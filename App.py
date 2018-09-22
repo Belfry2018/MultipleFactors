@@ -55,7 +55,7 @@ def getAStock(code):
 	data=ts.get_hist_data(code).head(90)
 	for index, row in data.iterrows():
 		temp={}
-		temp['time']=index
+		temp['time']=row['date']
 		temp['start']=row['open']
 		temp['end']=row['close']
 		temp['max']=row['high']
@@ -105,7 +105,7 @@ def getSZData(date):
 if __name__ == "__main__" :
 	# db.setup_db()
 	# getStocksData()
-	# getAStock('000001')
+	# print(getAStock('000001'))
 	# getStrategy(12232323)
 	# app.run(debug=True)
 	print(getSZData('2018-08'))
