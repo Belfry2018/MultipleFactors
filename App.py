@@ -1,3 +1,5 @@
+import string
+
 from flask import Flask
 from flask_apscheduler import APScheduler
 import tushare as ts
@@ -87,14 +89,15 @@ def getStocksData():
 
 def getSZData(date):
 	date=date+'-32'
-	df=ts.get_k_data(code='sh',ktype='M')[['date','open','close']]
+	df=ts.get_hist_data(code='sh',ktype='M')
+	df=df[['date','open','close']]
 	df=df[df['date']<=date].sort_index(ascending=False).head(12)
-	# print(df)
 	res={}
 	for line in df.values:
 		open=line[1]
 		close=line[2]
-		res[line[0]]=(close-open)/open
+		date=line[0][0:7]
+		res[date]=(close-open)/open
 	return res
 
 
