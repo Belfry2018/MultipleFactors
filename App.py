@@ -2,6 +2,9 @@ from flask import Flask
 from flask_apscheduler import APScheduler
 import tushare as ts
 import json
+
+from pandas import DataFrame
+
 import DBHandler as db
 from DBHandler import Strategy
 
@@ -82,11 +85,26 @@ def getStocksData():
 	df.to_sql('stock',db.get_engine(),if_exists='replace',index=False)
 	pass
 
+def getSZData(date):
+	date=date+'-32'
+	df=ts.get_k_data(code='sh',ktype='M')[['date','open','close']]
+	df=df[df['date']<=date].sort_index(ascending=False).head(12)
+	# print(df)
+	res={}
+	for line in df.values:
+		open=line[1]
+		close=line[2]
+		res[line[0]]=(close-open)/open
+	return res
+
+
 
 if __name__ == "__main__" :
 	# db.setup_db()
 	# getStocksData()
-	getAStock('000001')
+	# getAStock('000001')
 	# getStrategy(12232323)
 	# app.run(debug=True)
+	print(getSZData('2018-08'))
+
 
