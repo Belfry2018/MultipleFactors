@@ -247,38 +247,7 @@ def getLoopbackInfo(recordId):
 
 	result = loopbackData
 
-	return json.dumps(result,ensure_ascii=False)
-
-
-@app.route('/strategy/record/<int:recordId>')
-def getStrategyInfo(recordId):
-	result={}
-	stocks=[]
-	oldStrategy = getStrategy(recordId)
-	result['recordName'] = oldStrategy.name
-	result['recordTime'] = oldStrategy.time
-	# result['todayBenefit']
-	tempRate = 0
-	for i in range(10):
-		stockId =oldStrategy.items[i].stock_id
-		temp = {}
-		temp['buyRate'] = oldStrategy.items[i].buy_rate
-		tempProfit =getMonthReturnPerYear(stockId)
-		temp['stockId']=stockId
-		stock=getAStockBasicData(stockId)
-		temp['stockName']=stock.name
-		temp['currentPrice']=stock.trade
-		temp['trend']=stock.changepercent
-		temp['turnoverRate']=stock.turnoverratio
-		temp['marketProfitability']=stock.per
-		temp['todayVolume']=stock.volume
-		tempRate = tempRate + temp['buyRate']*getMonthReturnLatest(temp['stockId'])
-		stocks.append(temp)
-	result['todayBenefit']=tempRate
-	result['stocks']=stocks
-
-	return json.dumps(result,ensure_ascii=False)
-
+	return json.dumps(result,ensure_ascii=False)	
 
 
 def getAStockBasicData(code):
