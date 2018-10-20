@@ -107,11 +107,11 @@ def getProfitInfo():
 	profitList = [0,0,0,0,0,0,0,0,0,0,0,0]
 	for i in range(10):
 		stockId =templist[i][0]
-		print('stockId = ',stockId)
+		# print('stockId = ',stockId)
 		temp = {}
 		temp['buyRate'] = tempProfitDic.get(stockId)
 		tempProfit =getMonthReturnPerYear(stockId)
-		print('temp = ',temp)
+		# print('temp = ',temp)
 		for i in range(12):
 			tempProfit[i]=tempProfit[i]*temp['buyRate']
 		profitList =list_add(profitList,tempProfit)
@@ -344,7 +344,7 @@ def getMonthReturnLatest(code):
 
 
 if __name__ == "__main__" :
-	print(getTopX())
+	# print(getTopX())
 	# db.setup_db()
 	# getStocksData()
 	# print(getAStock('000001'))
@@ -352,3 +352,4 @@ if __name__ == "__main__" :
 	app.run(debug=True)
 	# print(getMonthReturnLatest('000520'))
 	# print(getTopX())
+	# print(getSZData('2018-03'))
