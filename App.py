@@ -107,9 +107,11 @@ def getProfitInfo():
 	profitList = [0,0,0,0,0,0,0,0,0,0,0,0]
 	for i in range(10):
 		stockId =templist[i][0]
+		print('stockId = ',stockId)
 		temp = {}
 		temp['buyRate'] = tempProfitDic.get(stockId)
 		tempProfit =getMonthReturnPerYear(stockId)
+		print('temp = ',temp)
 		for i in range(12):
 			tempProfit[i]=tempProfit[i]*temp['buyRate']
 		profitList =list_add(profitList,tempProfit)
@@ -200,7 +202,8 @@ def getStrategyInfo(recordId):
 	result['recordTime'] = oldStrategy.time
 	# result['todayBenefit']
 	tempRate = 0
-	for i in range(10):
+	items_size=len(oldStrategy.items)
+	for i in range(items_size):
 		stockId =oldStrategy.items[i].stock_id
 		temp = {}
 		temp['buyRate'] = oldStrategy.items[i].buy_rate
@@ -226,10 +229,11 @@ def getStrategyInfo(recordId):
 def getLoopbackInfo(recordId):
 	oldStrategy = getStrategy(recordId)
 	profitList = [0,0,0,0,0,0,0,0,0,0,0,0]
-	for i in range(10):
+	items_size=len(oldStrategy.items)
+	for i in range(items_size):
 		stockId =oldStrategy.items[i].stock_id
 		temp = {}
-		temp['buyRate'] = oldStrategy.item[i].buy_rate
+		temp['buyRate'] = oldStrategy.items[i].buy_rate
 		tempProfit =getMonthReturnPerYear(stockId)
 		for i in range(12):
 			tempProfit[i]=tempProfit[i]*temp['buyRate']
@@ -344,7 +348,6 @@ if __name__ == "__main__" :
 	# getStocksData()
 	# print(getAStock('000001'))
 	# getStrategy(12232323)
-	# app.run(debug=True)
-	print(getMonthReturnLatest('000520'))
-
-
+	app.run(debug=True)
+	# print(getMonthReturnLatest('000520'))
+	# print(getTopX())
