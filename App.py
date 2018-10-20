@@ -344,6 +344,7 @@ def getMonthReturnLatest(code):
 
 
 if __name__ == "__main__" :
+	print(getTopX())
 	# db.setup_db()
 	# getStocksData()
 	# print(getAStock('000001'))
