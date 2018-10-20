@@ -49,15 +49,17 @@ def getOneYearMonthList(a):
 	monthNow = int(a.split('-')[1])
 	retList = []
 	if monthNow == 12:
-		for i in range(12):
+		for i in range(9):
+			retList.append(str(yearNow) + '-' + '0'+str(i+1))
+		for i in range(3):
 			retList.append(str(yearNow) + '-' + str(i+1))
 	else:
 		monthBegin = monthNow+1
 		monthBeforeNum = 12 - monthNow
 		for i in range(monthBeforeNum):
-			retList.append(str(yearNow-1) + '-' + str(monthBegin+i))
+			retList.append(str(yearNow-1) + '-' + str('%02d' % (monthBegin+i)))
 		for i in range(12 -monthBeforeNum):
-			retList.append(str(yearNow) + '-' + str(i+1))
+			retList.append(str(yearNow) + '-' + str('%02d' % (i+1) ))
 	return retList
 
 
@@ -240,6 +242,7 @@ def getLoopbackInfo(recordId):
 		profitList =list_add(profitList,tempProfit)
 
 	loopbackData = []
+
 	loopbackPeryear =getSZData('2018-06')
 	monthList =getOneYearMonthList('2018-06')
 	for i in range(12):
@@ -344,7 +347,7 @@ def getMonthReturnLatest(code):
 
 
 if __name__ == "__main__" :
-	print(getTopX())
+
 	# db.setup_db()
 	# getStocksData()
 	# print(getAStock('000001'))
