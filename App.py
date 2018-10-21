@@ -96,6 +96,7 @@ def getAStock(code):
 
 	return json.dumps(result,ensure_ascii=False)
 
+recommend_num=10
 
 @app.route('/strategy/recommend/profit')
 def getProfitInfo():
@@ -107,7 +108,7 @@ def getProfitInfo():
 	result['todayBenefit']=tempProfitDic.get('value')
 	templist =getTopX()
 	profitList = [0,0,0,0,0,0,0,0,0,0,0,0]
-	for i in range(10):
+	for i in range(recommend_num):
 		stockId =templist[i][0]
 		# print('stockId = ',stockId)
 		temp = {}
@@ -154,7 +155,7 @@ def getRiskInfo():
 	result['todayBenefit']=tempRiskDic.get('value')
 	templist =getTopX()
 	profitList = [0,0,0,0,0,0,0,0,0,0,0,0]
-	for i in range(10):
+	for i in range(recommend_num):
 		stockId =templist[i][0]
 		temp = {}
 		temp['buyRate'] = tempRiskDic.get(stockId)
@@ -247,7 +248,7 @@ def getLoopbackInfo(recordId):
 	monthList =getOneYearMonthList('2018-06')
 	for i in range(12):
 		temp = {}
-		temp['data']= monthList[i]
+		temp['date']= monthList[i]
 		temp['上证指数']= loopbackPeryear.get(temp['data'])
 		temp['自选股'] = profitList[i]
 		loopbackData.append(temp)
@@ -356,3 +357,6 @@ if __name__ == "__main__" :
 	# print(getMonthReturnLatest('000520'))
 	# print(getTopX())
 	# print(getSZData('2018-03'))
+	# date = datetime.now()
+	# time = date.year.__str__() + '-' + date.month.__str__()
+	# print(time)
