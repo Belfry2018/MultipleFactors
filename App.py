@@ -135,8 +135,8 @@ def getProfitInfo():
 	monthList =getOneYearMonthList('2018-06')
 	for i in range(12):
 		temp = {}
-		temp['data']= monthList[i]
-		temp['上证指数']= loopbackPeryear.get(temp['data'])
+		temp['date']= monthList[i]
+		temp['上证指数']= loopbackPeryear.get(temp['date'])
 		temp['自选股'] = profitList[i]
 		loopbackData.append(temp)
 
@@ -180,8 +180,8 @@ def getRiskInfo():
 	monthList =getOneYearMonthList('2018-06')
 	for i in range(12):
 		temp = {}
-		temp['data']= monthList[i]
-		temp['上证指数']= loopbackPeryear.get(temp['data'])
+		temp['date']= monthList[i]
+		temp['上证指数']= loopbackPeryear.get(temp['date'])
 		temp['自选股'] = profitList[i]
 		loopbackData.append(temp)
 
@@ -249,7 +249,7 @@ def getLoopbackInfo(recordId):
 	for i in range(12):
 		temp = {}
 		temp['date']= monthList[i]
-		temp['上证指数']= loopbackPeryear.get(temp['data'])
+		temp['上证指数']= loopbackPeryear.get(temp['date'])
 		temp['自选股'] = profitList[i]
 		loopbackData.append(temp)
 
