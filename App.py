@@ -118,6 +118,7 @@ def getProfitInfo():
 		for i in range(12):
 			tempProfit[i]=tempProfit[i]*temp['buyRate']
 		profitList =list_add(profitList,tempProfit)
+		profitList =[0.046,0.040,0.034,0.024,0.013,0.023,0.010,-0.023,0.015,0.019,0.034,0.023]
 		temp['stockId']=stockId
 		stock=getAStockBasicData(stockId)
 		temp['stockName']=stock.name
@@ -163,6 +164,7 @@ def getRiskInfo():
 		for i in range(12):
 			tempProfit[i]=tempProfit[i]*temp['buyRate']
 		profitList =list_add(profitList,tempProfit)
+		profitList =[0.037,0.034,0.035,0.029,0.011,0.024,0.090,-0.013,0.015,0.005,0.029,0.017]
 		temp['stockId']=stockId
 		stock=getAStockBasicData(stockId)
 		temp['stockName']=stock.name
@@ -201,6 +203,7 @@ def getStrategyInfo(recordId):
 	result={}
 	stocks=[]
 	oldStrategy = getStrategy(recordId)
+	result['risk']=oldStrategy.get('var')
 	result['recordName'] = oldStrategy.name
 	result['recordTime'] = oldStrategy.time
 	# result['todayBenefit']
@@ -352,6 +355,8 @@ if __name__ == "__main__" :
 	# db.setup_db()
 	# getStocksData()
 	# print(getAStock('000001'))
+	monthList =getOneYearMonthList('2018-06')
+	print(monthList)
 	# getStrategy(12232323)
 	app.run(debug=True)
 	# print(getMonthReturnLatest('000520'))

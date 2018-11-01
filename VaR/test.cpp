@@ -26,8 +26,8 @@ const int S = 25, N = 10;
 // s.t k1x1+k2x2+...k10x10 >= lower_bound_profit, mini: VaR
 // s.t VaR <= upper_bound_VaR, maxi: k1x1+k2x2+...k10x10
 const double C = -1.6448536269514729;
-const double lower_bound_profit = 0.0300;
-const double upper_bound_VaR = 0.0020;
+const double lower_bound_profit = 0.0300;//0.1
+const double upper_bound_VaR = 0.0020;//0.1
 
 struct Node{
     char id[10];
